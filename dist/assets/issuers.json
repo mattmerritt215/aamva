@@ -1,0 +1,284 @@
+[
+    {
+        "name": "Alabama",
+        "abbreviation": "AL",
+        "iin": "636033",
+        "revision_date": "2014-11-01"
+    },
+    {
+        "name": "Alaska",
+        "abbreviation": "AK",
+        "iin": "636059"
+    },
+    {
+        "name": "Arkansas",
+        "abbreviation": "AR",
+        "iin": "636021",
+        "revision_date": "2018-03-01"
+    },
+    {
+        "name": "Arizona",
+        "abbreviation": "AZ",
+        "iin": "636026",
+        "revision_date": "2023-02-28"
+    },
+    {
+        "name": "California",
+        "abbreviation": "CA",
+        "iin": "636014",
+        "revision_date": "2017-08-29"
+    },
+    {
+        "name": "Colorado",
+        "abbreviation": "CO",
+        "iin": "636020"
+    },
+    {
+        "name": "Connecticut",
+        "abbreviation": "CT",
+        "iin": "636006"
+    },
+    {
+        "name": "Delaware",
+        "abbreviation": "DE",
+        "iin": "636011",
+        "revision": "2017-08-02"
+    },
+    {
+        "name": "Florida",
+        "abbreviation": "FL",
+        "iin": "636010",
+        "revision_date": "2020-03-01"
+    },
+    {
+        "name": "Georgia",
+        "abbreviation": "GA",
+        "iin": "636055",
+        "revision_date": "2018-01-02"
+    },
+    {
+        "name": "Hawaii",
+        "abbreviation": "HI",
+        "iin": "636047"
+    },
+    {
+        "name": "Idaho",
+        "abbreviation": "ID",
+        "iin": "636050",
+        "revision_date": "2021-01-31"
+    },
+    {
+        "name": "Illinois",
+        "abbreviation": "IL",
+        "iin": "636035",
+        "revision_date": "2015-09-17"
+    },
+    {
+        "name": "Indiana",
+        "abbreviation": "IN",
+        "iin": "636037",
+        "revision_date": "2018-07-24"
+    },
+    {
+        "name": "Iowa",
+        "abbreviation": "IA",
+        "iin": "636018",
+        "revision_date": "2017-06-29"
+    },
+    {
+        "name": "Kansas",
+        "abbreviation": "KS",
+        "iin": "636022",
+        "revision_date": "2024-02-24"
+    },
+    {
+        "name": "Kentucky",
+        "abbreviation": "KY",
+        "iin": "636046"
+    },
+    {
+        "name": "Louisiana",
+        "abbreviation": "LA",
+        "iin": "636007", 
+        "revision_date": "2015-02-10"
+    },
+    {
+        "name": "Maine",
+        "abbreviation": "ME",
+        "iin": "636041",
+        "revision_date": "2019-01-01"
+    },
+    {
+        "name": "Maryland",
+        "abbreviation": "MD",
+        "iin": "636003"
+    },
+    {
+        "name": "Massachusetts",
+        "abbreviation": "MA",
+        "iin": "636002",
+        "revision_date": "2016-02-22"
+    },
+    {
+        "name": "Michigan",
+        "abbreviation": "MI",
+        "iin": "636032"
+    },
+    {
+        "name": "Minnesota",
+        "abbreviation": "MN",
+        "iin": "636038"
+    },
+    {
+        "name": "Mississippi",
+        "abbreviation": "MS",
+        "iin": "636051"
+    },
+    {
+        "name": "Missouri",
+        "abbreviation": "MO",
+        "iin": "636030",
+        "revision_date": "2020-01-27"
+    },
+    {
+        "name": "Montana",
+        "abbreviation": "MT",
+        "iin": "636008",
+        "revision_date": "2016-02-14"
+    },
+    {
+        "name": "North Carolina",
+        "abbreviation": "NC",
+        "iin": "636004",
+        "revision_date": "2014-10-24"
+    },
+    {
+        "name": "North Dakota",
+        "abbreviation": "ND",
+        "iin": "636034",
+        "revision_date": "2023-03-10"
+    },
+    {
+        "name": "Nebraska",
+        "abbreviation": "NE",
+        "iin": "636054",
+        "revision_date": "2021-04-05"
+    },
+    {
+        "name": "New Hampshire",
+        "abbreviation": "NH",
+        "iin": "636039"
+    },
+    {
+        "name": "New Jersey",
+        "abbreviation": "NJ",
+        "iin": "636036",
+        "revision_date": "2020-01-08"
+    },
+    {
+        "name": "New Mexico",
+        "abbreviation": "NM",
+        "iin": "636009",
+        "revision_date": "2015-05-20"
+    },
+    {
+        "name": "Nevada",
+        "abbreviation": "NV",
+        "iin": "636049",
+        "revision_date": "2022-05-27"
+    },
+    {
+        "name": "New York",
+        "abbreviation": "NY",
+        "iin": "636001",
+        "revision_date": "2022-03-01"
+    },
+    {
+        "name": "Ohio",
+        "abbreviation": "OH",
+        "iin": "636023"
+    },
+    {
+        "name": "Oklahoma",
+        "abbreviation": "OK",
+        "iin": "636058"
+    },
+    {
+        "name": "Oregon",
+        "abbreviation": "OR",
+        "iin": "636029"
+    },
+    {
+        "name": "Pennsylvania",
+        "abbreviation": "PA",
+        "iin": "636025",
+        "revision_date": "2022-03-25"
+    },
+    {
+        "name": "Rhode Island",
+        "abbreviation": "RI",
+        "iin": "636052",
+        "revision_date": "2016-01-25"
+    },
+    {
+        "name": "South Carolina",
+        "abbreviation": "SC",
+        "iin": "636005"
+    },
+    {
+        "name": "South Dakota",
+        "abbreviation": "SD",
+        "iin": "636042",
+        "revision_date": "2017-06-29"
+    },
+    {
+        "name": "Tennessee",
+        "abbreviation": "TN",
+        "iin": "636053",
+        "revision_date": "2011-12-02"
+    },
+    {
+        "name": "Texas",
+        "abbreviation": "TX",
+        "iin": "636015",
+        "revision_date": "2020-02-23"
+    },
+    {
+        "name": "Utah",
+        "abbreviation": "UT",
+        "iin": "636040",
+        "revision_date": "2021-06-01"
+    },
+    {
+        "name": "Virginia",
+        "abbreviation": "VA",
+        "iin": "636000",
+        "revision_date": "2011-12-02"
+    },
+    {
+        "name": "Vermont",
+        "abbreviation": "VT",
+        "iin": "636024"
+    },
+    {
+        "name": "Washington",
+        "abbreviation": "WA",
+        "iin": "636045"
+    },
+    {
+        "name": "Wisconsin",
+        "abbreviation": "WI",
+        "iin": "636031"
+    },
+    {
+        "name": "West Virginia",
+        "abbreviation": "WV",
+        "iin": "636061"
+    },
+    {
+        "name": "Wyoming",
+        "abbreviation": "WY",
+        "iin": "636060",
+        "revision_date": "2022-05-09"
+    }
+]

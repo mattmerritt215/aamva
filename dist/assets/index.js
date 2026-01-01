@@ -1,290 +1,12 @@
-
-const StatesJSON = [
-  {
-    "name": "Alaska",
-    "abbreviation": "AK",
-    "iin": "636059"
-  },
-  {
-    "name": "Alabama",
-    "abbreviation": "AL",
-    "iin": "636033"
-  },
-  {
-    "name": "Arkansas",
-    "abbreviation": "AR",
-    "iin": "636021"
-  },
-  {
-    "name": "Arizona",
-    "abbreviation": "AZ",
-    "iin": "636026"
-  },
-  {
-    "name": "California",
-    "abbreviation": "CA",
-    "iin": "636014"
-  },
-  {
-    "name": "Colorado",
-    "abbreviation": "CO",
-    "iin": "636020"
-  },
-  {
-    "name": "Connecticut",
-    "abbreviation": "CT",
-    "iin": "636006"
-  },
-  {
-    "name": "Delaware",
-    "abbreviation": "DE",
-    "iin": "636011",
-    "revision": "2017-08-02"
-  },
-  {
-    "name": "Florida",
-    "abbreviation": "FL",
-    "iin": "636010"
-  },
-  {
-    "name": "Georgia",
-    "abbreviation": "GA",
-    "iin": "636055"
-  },
-  {
-    "name": "Hawaii",
-    "abbreviation": "HI",
-    "iin": "636047"
-  },
-  {
-    "name": "Iowa",
-    "abbreviation": "IA",
-    "iin": "636018"
-  },
-  {
-    "name": "Idaho",
-    "abbreviation": "ID",
-    "iin": "636050"
-  },
-  {
-    "name": "Illinois",
-    "abbreviation": "IL",
-    "iin": "636035"
-  },
-  {
-    "name": "Indiana",
-    "abbreviation": "IN",
-    "iin": "636037"
-  },
-  {
-    "name": "Kansas",
-    "abbreviation": "KS",
-    "iin": "636022"
-  },
-  {
-    "name": "Kentucky",
-    "abbreviation": "KY",
-    "iin": "636046"
-  },
-  {
-    "name": "Louisiana",
-    "abbreviation": "LA",
-    "iin": "636007"
-  },
-  {
-    "name": "Massachusetts",
-    "abbreviation": "MA",
-    "iin": "636002"
-  },
-  {
-    "name": "Maryland",
-    "abbreviation": "MD",
-    "iin": "636003"
-  },
-  {
-    "name": "Maine",
-    "abbreviation": "ME",
-    "iin": "636041"
-  },
-  {
-    "name": "Michigan",
-    "abbreviation": "MI",
-    "iin": "636032"
-  },
-  {
-    "name": "Minnesota",
-    "abbreviation": "MN",
-    "iin": "636038"
-  },
-  {
-    "name": "Missouri",
-    "abbreviation": "MO",
-    "iin": "636030"
-  },
-  {
-    "name": "Mississippi",
-    "abbreviation": "MS",
-    "iin": "636051"
-  },
-  {
-    "name": "Montana",
-    "abbreviation": "MT",
-    "iin": "636008"
-  },
-  {
-    "name": "North Carolina",
-    "abbreviation": "NC",
-    "iin": "636004"
-  },
-  {
-    "name": "North Dakota",
-    "abbreviation": "ND",
-    "iin": "636034"
-  },
-  {
-    "name": "Nebraska",
-    "abbreviation": "NE",
-    "iin": "636054"
-  },
-  {
-    "name": "New Hampshire",
-    "abbreviation": "NH",
-    "iin": "636039"
-  },
-  {
-    "name": "New Jersey",
-    "abbreviation": "NJ",
-    "iin": "636036"
-  },
-  {
-    "name": "New Mexico",
-    "abbreviation": "NM",
-    "iin": "636009"
-  },
-  {
-    "name": "Nevada",
-    "abbreviation": "NV",
-    "iin": "636049"
-  },
-  {
-    "name": "New York",
-    "abbreviation": "NY",
-    "iin": "636001"
-  },
-  {
-    "name": "Ohio",
-    "abbreviation": "OH",
-    "iin": "636023"
-  },
-  {
-    "name": "Oklahoma",
-    "abbreviation": "OK",
-    "iin": "636058"
-  },
-  {
-    "name": "Oregon",
-    "abbreviation": "OR",
-    "iin": "636029"
-  },
-  {
-    "name": "Pennsylvania",
-    "abbreviation": "PA",
-    "iin": "636025",
-    "revision": "2016-06-07"
-  },
-  {
-    "name": "Rhode Island",
-    "abbreviation": "RI",
-    "iin": "636052"
-  },
-  {
-    "name": "South Carolina",
-    "abbreviation": "SC",
-    "iin": "636005"
-  },
-  {
-    "name": "South Dakota",
-    "abbreviation": "SD",
-    "iin": "636042"
-  },
-  {
-    "name": "Tennessee",
-    "abbreviation": "TN",
-    "iin": "636053"
-  },
-  {
-    "name": "Texas",
-    "abbreviation": "TX",
-    "iin": "636015"
-  },
-  {
-    "name": "Utah",
-    "abbreviation": "UT",
-    "iin": "636040"
-  },
-  {
-    "name": "Virginia",
-    "abbreviation": "VA",
-    "iin": "636000"
-  },
-  {
-    "name": "Vermont",
-    "abbreviation": "VT",
-    "iin": "636024"
-  },
-  {
-    "name": "Washington",
-    "abbreviation": "WA",
-    "iin": "636045"
-  },
-  {
-    "name": "Wisconsin",
-    "abbreviation": "WI",
-    "iin": "636031"
-  },
-  {
-    "name": "West Virginia",
-    "abbreviation": "WV",
-    "iin": "636061"
-  },
-  {
-    "name": "Wyoming",
-    "abbreviation": "WY",
-    "iin": "636060"
-  }
-];
-
 $(document).ready(() => {
-    let activetab;
-
-    activetab = $("#default-tab").openTab($("#default-tab"));
-
-    $(".tab").click(() => {
-        activetab = $(this).openTab($(this));
-    });
-
-    if (activetab === "Form") {
-        $.each(StatesJSON, (i) => {
-            $("#selIssueState").append(`<option value=${StatesJSON[i].abbreviation} data-iin=${StatesJSON[i].iin}>${StatesJSON[i].abbreviation}</option>`);
-            $("#selAddressState").append(`<option value=${StatesJSON[i].abbreviation}>${StatesJSON[i].abbreviation}</option>`);
-        });
-    }
+  const ISSUERS_JSON = $.fn.getJSONData("dist/assets/json/issuers.json");
+  $.each(ISSUERS_JSON, (i) => {
+    $("#selIssueState").append(`<option value=${ISSUERS_JSON[i].abbreviation} data-iin=${ISSUERS_JSON[i].iin}>${ISSUERS_JSON[i].abbreviation}</option>`);
+    $("#selAddressState").append(`<option value=${ISSERS_JSON[i].abbreviation}>${ISSUERS_JSON[i].abbreviation}</option>`);           
+  });
 
     $("#selIssueState").change((e) => {
-        let revDate = "";
-        $("#txtRevisionDate").prop("readonly", false);
-        switch($("#selIssueState").find('option:selected').val()) {
-            case "DE":
-                revDate = "2017-08-02";
-                break;
-            case "NJ":
-                break;
-            case "PA":
-                revDate = "2016-06-07";
-                break;
-            default:
-                break;
-        }
+        let revDate = ISSUERS_JSON.find(issuer => issuer.abbreviation === $("#selIssueState").find("option:selected").val())?.revision_date || "";
 
         if (revDate !== "") {
             $("#txtRevisionDate").val(revDate);
@@ -317,21 +39,6 @@ $(document).ready(() => {
 
 
 $.fn.extend({
-    openTab: function(elmnt) {
-        let i, tabcontent, tablinks;
-        tabcontent=$(".tabcontent");
-        for (i=0; i<tabcontent.length; i++){
-            $(tabcontent[i]).hide();
-        }
-        tablinks=$(".tab");
-        for (i=0; i<tablinks.length; i++){
-            $(tablinks[i]).removeClass("activetab").addClass("inactivetab");
-        }
-        $(`#${elmnt.data("tabname")}`).toggle();
-        elmnt.removeClass("inactivetab").addClass("activetab");
-        return elmnt.data("tabname");
-    },
-
     formatDate: function(dateString) {
         let year = dateString.substring(0,4);
         let month = dateString.substring(5,7);
@@ -432,12 +139,14 @@ $.fn.extend({
         aamvaSubfile.DCK = $("#txtInventoryNum").val();
 
         if ($('#chkRealID').is(':checked')) {
-            aamvaSubfile.DDA="F";
+          aamvaSubfile.DDA="F";
         } else {
           aamvaSubfile.DDA="N";
         }
-
-        aamvaSubfile.DDB = $.fn.formatDate($('#txtRevisionDate').val());
+        
+        if (revDate !== "") {
+          aamvaSubfile.DDB = $.fn.formatDate(revDate);
+        }
 
         if($('#chkDonor').is(':checked')) {
           aamvaSubfile.DDK="1"
@@ -540,6 +249,15 @@ $.fn.extend({
             y += bh;
         }
     },
+
+    getJSONData: function(url){
+        fetch(url)
+          .then((response) => response.json())
+          .catch((error) => {
+            console.error('Error fetching JSON data:', error);
+          })
+          .finally((data) => {return data;});
+      }
 });
 
 $.validator.addMethod(
