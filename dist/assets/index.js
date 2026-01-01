@@ -451,19 +451,23 @@ $.fn.extend({
         consoleString = subfileString;
 
         let i = 0;
+        let subfileCharCount = 0;
         let j = Object.keys(aamvaSubfile).length-1;
 
         for (const [key, value] of Object.entries(aamvaSubfile)) {
             if ( i < j) {
                 subfileString += `${key}${value.toString().toUpperCase()}${AAMVA_DATA_ELEMENT_SEPERATOR}`;
                 consoleString += `${key}${value.toString().toUpperCase()}<DataElementSeperator>`;
+                subfileCharCount += subfileCharCount + key.length + value.toString().length + AAMVA_DATA_ELEMENT_SEPERATOR.length;
                 i++;
             } else {
                 subfileString += `${key}${value.toString().toUpperCase()}${AAMVA_SEGMENT_TERMINATOR}`;
                 consoleString += `${key}${value.toString().toUpperCase()}<SegmentTerminator>`;
+                subfileCharCount += subfileCharCount + key.length + value.toString().length + AAMVA_SEGMENT_TERMINATOR.length;
             }
         }
 
+        console.log(`subfileCharCount = ${subfileCharCount}`);
         jurisdictionData=$("#txtStateData").val().split(",");
         jurisdictionType = `Z${$('#selIssueState').find('option:selected').val().charAt(0)}`;
         jurisdictionString = `${jurisdictionType}`;
