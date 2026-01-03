@@ -1,11 +1,18 @@
 $(document).ready(() => {
-  const ISSUERS_JSON = $.fn.getJSONData("./assets/issuers.json");
-  $.each(ISSUERS_JSON, (i) => {
-    $("#selIssueState").append(`<option value=${ISSUERS_JSON[i].abbreviation} data-iin=${ISSUERS_JSON[i].iin}>${ISSUERS_JSON[i].abbreviation}</option>`);
-    $("#selAddressState").append(`<option value=${ISSERS_JSON[i].abbreviation}>${ISSUERS_JSON[i].abbreviation}</option>`);           
-  });
+  const ISSUERS_JSON = fetch("./assets/issuers.json")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json(); // Parse JSON
+    }).catch((error) => console.error('Error fetching JSON:', error));
 
-    $("#selIssueState").change((e) => {
+    $.each(ISSUERS_JSON, (i) => {
+        $("#selIssueState").append(`<option value=${ISSUERS_JSON[i].abbreviation} data-iin=${ISSUERS_JSON[i].iin}>${ISSUERS_JSON[i].abbreviation}</option>`);
+        $("#selAddressState").append(`<option value=${ISSERS_JSON[i].abbreviation}>${ISSUERS_JSON[i].abbreviation}</option>`);           
+      });
+
+      $("#selIssueState").change((e) => {
         let revDate = ISSUERS_JSON.find(issuer => issuer.abbreviation === $("#selIssueState").find("option:selected").val())?.revision_date || "";
 
         if (revDate !== "") {
@@ -13,7 +20,7 @@ $(document).ready(() => {
             $("#txtRevisionDate").prop("readonly", true);
         }
     });
-
+    
     $("#btnAdvanced").click((e) => {
         if ($("#advancedFields").hasClass("show")){
             $(this).removeClass("btn-primary");
