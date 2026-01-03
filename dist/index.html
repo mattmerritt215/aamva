@@ -22,10 +22,6 @@
             })
         </script>
 
-        <!-- PDF417-js -->
-        <script src="assets/bcmath-min.js"></script>
-        <script src="assets/pdf417-min.js"></script>
-
         <!-- jsBarcode -->
         <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/barcodes/JsBarcode.code128.min.js"></script>
 
@@ -44,17 +40,14 @@
             <h1>PDF417 Barcode Encoder</h1>
             <p>Create PDF417 barcodes to meet AAMVA standards</p>
         </div>
-        <div class="tabrow d-flex flex-row">
-            <button class="tab" id="default-tab" data-tabname="Form">Form Entry</button>
-            <button class="tab" data-tabname="History">History</button>
-        </div>
         <div id="container" class="container-fluid">
            
                 <div id="output" class="output-hidden">
                     <div class="d-flex flex-column justify-content-center">
                         <div id="pdf417" class="p-2"></div>
-`                       <hr>
+                        <div id="code128" class="p-2"></div>
                     </div>
+                    <hr>
                 </div>
                 <form id="input-form" class="needs-validation">
                     <div class="row">
@@ -202,12 +195,12 @@
                         </div>
                     </div>
                     <hr>
-                    <!-- <div class="d-flex justify-content-end">
+                    <div class="d-flex justify-content-end">
                         <div class="flex-shrink-1 form-check form-check-inline">
                             <input id="chkMake1DBarcode" class="form-check-input" value="true" type="checkbox">
                             <label class="form-check-label" for="chkMake1DBarcode">Make 1D Barcode?</label>
                         </div>
-                    </div> -->
+                    </div>
                     <p>
                     <a id="btnAdvanced" class="btn btn-primary" data-bs-toggle="collapse" href="#advancedFields" role="button">
                         <i class="bi bi-caret-down-fill" style="padding-right: .55rem;"></i>Advanced Fields
@@ -268,7 +261,7 @@
             </div>
         </div>
         <div class="footer d-flex justify-content-end">
-                fagmob.fail PDF417 encoder
+                fagmob.lol PDF417 encoder
         </div>
     </body>
 </html>

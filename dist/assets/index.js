@@ -28,7 +28,7 @@ $(document).ready(() => {
 
     $("#btnSubmit").click((e) => {
         e.preventDefault();
-        $.fn.submit();
+        $.fn.render();
     })
 
     $("#btnReset").click((e) => {
@@ -54,11 +54,11 @@ $.fn.extend({
         $('#output').hide();
     },
 
-    submit: function() {
+    buildAamvaPayloadFromForm: function() {
         const AAMVA_COMPLIANCE_INDICATOR = "@";
-        const AAMVA_DATA_ELEMENT_SEPERATOR = "\x0A";
-        const AAMVA_RECORD_SEPERATOR = "\x1E";
-        const AAMVA_SEGMENT_TERMINATOR = "\x0D";
+        const AAMVA_DATA_ELEMENT_SEPERATOR = "010";
+        const AAMVA_RECORD_SEPERATOR = "030";
+        const AAMVA_SEGMENT_TERMINATOR = "013";
         const AAMVA_FILE_TYPE = "ANSI ";
         const AAMVA_VERSION = "10";
         const AAMVA_JURISDICTION_VERSION = "00";
@@ -165,14 +165,14 @@ $.fn.extend({
 
         for (const [key, value] of Object.entries(aamvaSubfile)) {
             if ( i < j) {
-                subfileString += `${key}${value.toString().toUpperCase()}${AAMVA_DATA_ELEMENT_SEPERATOR}`;
+                subfileString += `${key}${value.toString().toUpperCase()}^${AAMVA_DATA_ELEMENT_SEPERATOR}`;
                 consoleString += `${key}${value.toString().toUpperCase()}<DataElementSeperator>`;
-                subfileCharCount += subfileCharCount + key.length + value.toString().length + AAMVA_DATA_ELEMENT_SEPERATOR.length;
+                subfileCharCount += key.length + value.toString().length + String.fromCharCode(AAMVA_DATA_ELEMENT_SEPERATOR).length;
                 i++;
             } else {
-                subfileString += `${key}${value.toString().toUpperCase()}${AAMVA_SEGMENT_TERMINATOR}`;
+                subfileString += `${key}${value.toString().toUpperCase()}^${AAMVA_SEGMENT_TERMINATOR}`;
                 consoleString += `${key}${value.toString().toUpperCase()}<SegmentTerminator>`;
-                subfileCharCount += subfileCharCount + key.length + value.toString().length + AAMVA_SEGMENT_TERMINATOR.length;
+                subfileCharCount += key.length + value.toString().length + String.fromCharCode(AAMVA_SEGMENT_TERMINATOR).length;
             }
         }
 
@@ -180,6 +180,7 @@ $.fn.extend({
         jurisdictionData=$("#txtStateData").val().split(",");
         jurisdictionType = `Z${$('#selIssueState').find('option:selected').val().charAt(0)}`;
         jurisdictionString = `${jurisdictionType}`;
+        jurisdictionCharCount = jurisdictionString.length;
 
         consoleString += jurisdictionString;
 
@@ -189,26 +190,29 @@ $.fn.extend({
 
         for (let i = 0; i < jurisdictionData.length && i < 26; i++){
             if (i < jurisdictionData.length-1) {
-                jurisdictionString += `${jurisdictionType}${String.fromCharCode(65+i)}${jurisdictionData[i].toString().trim().toUpperCase()}${AAMVA_DATA_ELEMENT_SEPERATOR}`;
+                jurisdictionString += `${jurisdictionType}${String.fromCharCode(65+i)}${jurisdictionData[i].toString().trim().toUpperCase()}^${AAMVA_DATA_ELEMENT_SEPERATOR}`;
                 consoleString += `${jurisdictionType}${String.fromCharCode(65+i)}${jurisdictionData[i].toString().trim().toUpperCase()}<DataElementSeperator>`;
+                jurisdictionCharCount += `${jurisdictionType}${String.fromCharCode(65+i)}${jurisdictionData[i].toString().trim().toUpperCase()}`.length + String.fromCharCode(AAMVA_DATA_ELEMENT_SEPERATOR).length;
             } else {
                 jurisdictionString += `${jurisdictionType}${String.fromCharCode(65+i)}${jurisdictionData[i].toString().trim().toUpperCase()}${AAMVA_SEGMENT_TERMINATOR}`;
                 consoleString += `${jurisdictionType}${String.fromCharCode(65+i)}${jurisdictionData[i].toString().trim().toUpperCase()}<SegmentTerminator>`;
+                jurisdictionCharCount += `${jurisdictionType}${String.fromCharCode(65+i)}${jurisdictionData[i].toString().trim().toUpperCase()}`.length + String.fromCharCode(AAMVA_SEGMENT_TERMINATOR).length;
                 }
             }
 
             console.log(consoleString);
 
             recordOffset = `XXXX`;
-            recordLength = `0000${subfileString.length.toString()}`.slice(-4);
+            recordLength = `0000${subfileCharCount.toString()}`.slice(-4);
 
             jurisdictionOffset = `AAAA`;
-            jurisdictionLength = `0000${jurisdictionString.length.toString()}`.slice(-4);
+            jurisdictionLength = `0000${jurisdictionCharCount.toString()}`.slice(-4);
 
-            let header = `${AAMVA_COMPLIANCE_INDICATOR}${AAMVA_DATA_ELEMENT_SEPERATOR}${AAMVA_RECORD_SEPERATOR}${AAMVA_SEGMENT_TERMINATOR}${AAMVA_FILE_TYPE}${aamvaIIN}${AAMVA_VERSION}${AAMVA_JURISDICTION_VERSION}${AAMVA_ENTRIES}${aamvaSubfileType}`
+            let header = `${AAMVA_COMPLIANCE_INDICATOR}^${AAMVA_DATA_ELEMENT_SEPERATOR}^${AAMVA_RECORD_SEPERATOR}^${AAMVA_SEGMENT_TERMINATOR}${AAMVA_FILE_TYPE}${aamvaIIN}${AAMVA_VERSION}${AAMVA_JURISDICTION_VERSION}${AAMVA_ENTRIES}${aamvaSubfileType}`
+            let headerLength = `${AAMVA_COMPLIANCE_INDICATOR}`.length + String.fromCharCode(AAMVA_DATA_ELEMENT_SEPERATOR).length + String.fromCharCode(AAMVA_RECORD_SEPERATOR).length + String.fromCharCode(AAMVA_SEGMENT_TERMINATOR).length + `${AAMVA_FILE_TYPE}${aamvaIIN}${AAMVA_VERSION}${AAMVA_JURISDICTION_VERSION}${AAMVA_ENTRIES}${aamvaSubfileType}`.length;
             console.log(`header = ${header}`);
 
-            recordOffset = (header.length+recordOffset.length+recordLength.length+jurisdictionType.length+jurisdictionOffset.length+jurisdictionLength.length).toString();
+            recordOffset = (headerLength+recordOffset.length+recordLength.length+jurisdictionType.length+jurisdictionOffset.length+jurisdictionLength.length).toString();
             recordOffset = `0000${recordOffset}`.slice(-4);
             jurisdictionOffset = `0000${((Number(recordOffset)) + (Number(recordLength))).toString()}`.slice(-4);
 
@@ -217,47 +221,40 @@ $.fn.extend({
 
             let aamva = `${header}${subfileDescriptor}${subfileString}${jurisdictionString}`;
             console.log(`aamva = ${aamva}`);
-
-            $.fn.generatePDF417(aamva);
-            $('.output-hidden').show();
     },
 
-    generatePDF417: function(input) {
-        PDF417.init(input, 5);
+    getBarcodePNG: async (endpoint, text) => {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text })
+      });
 
-        let barcode = PDF417.getBarcodeArray();
-        let bw = 2;
-        let bh = 6;
-
-        $("#pdf417").empty().append(`<a><canvas width="${bw * barcode['num_cols']}" height="${bh * barcode['num_rows']}"></canvas></a>`);
-
-        $
-        let ctx = $("#pdf417>a").children()[0].getContext('2d');
-
-        var y = 0;
-        for (var r = 0; r < barcode['num_rows']; ++r) {
-            var x = 0;
-
-            for (var c = 0; c < barcode['num_cols']; ++c) {
-                ctx.fillStyle = 'white';
-                if (barcode['bcode'][r][c] == 1) {
-                    ctx.fillStyle = 'black';
-                }
-                ctx.fillRect(x,y,bw,bh);
-                x += bw;
-            }
-            y += bh;
-        }
+      if (!res.ok) throw new Error(await res.text());
+      return await res.blob(); 
     },
 
-    getJSONData: function(url){
-        fetch(url)
-          .then((response) => response.json())
-          .catch((error) => {
-            console.error('Error fetching JSON data:', error);
-          })
-          .finally((data) => {return data;});
+    render: async () => {
+      const payload = $.fn.buildAamvaPayloadFromForm();
+      const pdf417Blob = await $.fn.getBarcodePNG('/api/barcode/pdf417', payload);
+            
+      $('#pdf417').html(`<img src="${URL.createObjectURL(pdf417Blob)}" alt="PDF417 Barcode">`);
+
+      if ($('#chkMake1DBarcode').is(':checked')) {
+        const code128Blob = await $.fn.getBarcodePNG('/api/barcode/code128', payload);  
+        $('#code128').html(`<img src="${URL.createObjectURL(code128Blob)}" alt="Code128 Barcode">`);
       }
+
+      $('#output').show();
+    },
+
+    getJSONData: (url) => {
+      return fetch(url)
+        .then((response) => response.json())
+        .catch((error) => {
+          console.error('Error fetching JSON data:', error);
+        });
+    }
 });
 
 $.validator.addMethod(

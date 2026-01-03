@@ -1,0 +1,36 @@
+{
+  "name": "aamva",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "bin": {
+    "aamva-barcode": "./src/cli.js"
+  },
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "bwip-js": "^4.8.0",
+    "commander": "^14.0.2",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  },
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattmerritt215/aamva.git"
+  },
+  "keywords": ["barcode", "aamva", "driver license", "identification", "dl", "id", "pdf417", "code128", "generator", "encoder"],
+  "author": "matt Merritt <mattmerritt215@pm.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mattmerritt215/aamva/issues"
+  },
+  "homepage": "https://github.com/mattmerritt215/aamva#readme"
+}
