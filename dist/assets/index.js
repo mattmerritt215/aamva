@@ -1,5 +1,5 @@
 $(document).ready(() => {
-  const ISSUERS_JSON = $.fn.getJSONData("dist/assets/json/issuers.json");
+  const ISSUERS_JSON = $.fn.getJSONData("./assets/issuers.json");
   $.each(ISSUERS_JSON, (i) => {
     $("#selIssueState").append(`<option value=${ISSUERS_JSON[i].abbreviation} data-iin=${ISSUERS_JSON[i].iin}>${ISSUERS_JSON[i].abbreviation}</option>`);
     $("#selAddressState").append(`<option value=${ISSERS_JSON[i].abbreviation}>${ISSUERS_JSON[i].abbreviation}</option>`);           
