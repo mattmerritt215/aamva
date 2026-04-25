@@ -1,9 +1,18 @@
+let ISSUERS_JSON = [];
+
 $(document).ready(() => {
-  const ISSUERS_JSON = $.fn.getJSONData("dist/assets/json/issuers.json");
-  $.each(ISSUERS_JSON, (i) => {
-    $("#selIssueState").append(`<option value=${ISSUERS_JSON[i].abbreviation} data-iin=${ISSUERS_JSON[i].iin}>${ISSUERS_JSON[i].abbreviation}</option>`);
-    $("#selAddressState").append(`<option value=${ISSERS_JSON[i].abbreviation}>${ISSUERS_JSON[i].abbreviation}</option>`);           
-  });
+  fetch("assets/issuers.json")
+    .then((response) => response.json())
+    .then((data) => {
+      ISSUERS_JSON = data;
+      $.each(ISSUERS_JSON, (i) => {
+        $("#selIssueState").append(`<option value="${ISSUERS_JSON[i].abbreviation}" data-iin="${ISSUERS_JSON[i].iin}">${ISSUERS_JSON[i].abbreviation}</option>`);
+        $("#selAddressState").append(`<option value="${ISSUERS_JSON[i].abbreviation}">${ISSUERS_JSON[i].abbreviation}</option>`);
+      });
+    })
+    .catch((error) => {
+      console.error('Error fetching JSON data:', error);
+    });
 
     $("#selIssueState").change((e) => {
         let revDate = ISSUERS_JSON.find(issuer => issuer.abbreviation === $("#selIssueState").find("option:selected").val())?.revision_date || "";
@@ -11,10 +20,13 @@ $(document).ready(() => {
         if (revDate !== "") {
             $("#txtRevisionDate").val(revDate);
             $("#txtRevisionDate").prop("readonly", true);
+        } else {
+            $("#txtRevisionDate").val("");
+            $("#txtRevisionDate").prop("readonly", false);
         }
     });
 
-    $("#btnAdvanced").click((e) => {
+    $("#btnAdvanced").click(function(e) {
         if ($("#advancedFields").hasClass("show")){
             $(this).removeClass("btn-primary");
             $(this).addClass("if-not-collapsed");
@@ -23,7 +35,7 @@ $(document).ready(() => {
             $(this).addClass("btn-primary");
         }
 
-        $(this).find("i").toggleClass("bi bi-caret-down-fill bi bi-caret-up-fill");
+        $(this).find("i").toggleClass("bi-caret-down-fill bi-caret-up-fill");
     })
 
     $("#btnSubmit").click((e) => {
@@ -144,6 +156,7 @@ $.fn.extend({
           aamvaSubfile.DDA="N";
         }
         
+        let revDate = ISSUERS_JSON.find(issuer => issuer.abbreviation === $("#selIssueState").find("option:selected").val())?.revision_date || "";
         if (revDate !== "") {
           aamvaSubfile.DDB = $.fn.formatDate(revDate);
         }
@@ -167,12 +180,12 @@ $.fn.extend({
             if ( i < j) {
                 subfileString += `${key}${value.toString().toUpperCase()}${AAMVA_DATA_ELEMENT_SEPERATOR}`;
                 consoleString += `${key}${value.toString().toUpperCase()}<DataElementSeperator>`;
-                subfileCharCount += subfileCharCount + key.length + value.toString().length + AAMVA_DATA_ELEMENT_SEPERATOR.length;
+                subfileCharCount += key.length + value.toString().length + AAMVA_DATA_ELEMENT_SEPERATOR.length;
                 i++;
             } else {
                 subfileString += `${key}${value.toString().toUpperCase()}${AAMVA_SEGMENT_TERMINATOR}`;
                 consoleString += `${key}${value.toString().toUpperCase()}<SegmentTerminator>`;
-                subfileCharCount += subfileCharCount + key.length + value.toString().length + AAMVA_SEGMENT_TERMINATOR.length;
+                subfileCharCount += key.length + value.toString().length + AAMVA_SEGMENT_TERMINATOR.length;
             }
         }
 
@@ -231,7 +244,6 @@ $.fn.extend({
 
         $("#pdf417").empty().append(`<a><canvas width="${bw * barcode['num_cols']}" height="${bh * barcode['num_rows']}"></canvas></a>`);
 
-        $
         let ctx = $("#pdf417>a").children()[0].getContext('2d');
 
         var y = 0;
@@ -248,16 +260,7 @@ $.fn.extend({
             }
             y += bh;
         }
-    },
-
-    getJSONData: function(url){
-        fetch(url)
-          .then((response) => response.json())
-          .catch((error) => {
-            console.error('Error fetching JSON data:', error);
-          })
-          .finally((data) => {return data;});
-      }
+    }
 });
 
 $.validator.addMethod(
