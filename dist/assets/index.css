@@ -1,14 +1,313 @@
+/* ===== fagmob.lol dark theme ===== */
+/* Palette:
+   --bg-dark:    #151921   (deepest background)
+   --bg-surface: #1c2130   (cards, form area)
+   --bg-input:   #252a36   (input fields)
+   --border:     #2e3446   (subtle borders)
+   --text:       #c8cdd8   (body text)
+   --text-muted: #6b7280   (secondary text)
+   --text-bright:#EAEAEA   (headings, labels)
+   --accent:     #08D9D6   (cyan — primary action)
+   --accent-hot: #FF2E63   (magenta — destructive/active)
+*/
+
 * {
-    box-sizing:border-box;
+    box-sizing: border-box;
 }
 
-body,html {
-    background-color:#252A34;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+body, html {
+    background-color: #151921;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #c8cdd8;
 }
 
 body {
-    margin-bottom: 15px;
+    margin-bottom: 40px;
+}
+
+/* ===== Header ===== */
+.header {
+    background: linear-gradient(135deg, #08D9D6 0%, #06b8b5 100%);
+    color: #151921;
+}
+
+.header h1 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.header p {
+    opacity: 0.75;
+    margin-bottom: 0;
+}
+
+/* ===== Footer ===== */
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #151921;
+    border-top: 1px solid #2e3446;
+    font-size: xx-small;
+    color: #6b7280;
+    padding: 6px 12px;
+    z-index: 100;
+}
+
+/* ===== Main container ===== */
+#container {
+    background-color: #1c2130;
+    color: #c8cdd8;
+    margin: 0;
+    padding: 20px 20px 10px;
+    border-bottom: 1px solid #2e3446;
+}
+
+/* ===== Form elements ===== */
+.form-label, .col-form-label {
+    color: #c8cdd8;
+    font-size: 0.875rem;
+}
+
+.form-control {
+    background-color: #252a36;
+    border: 1px solid #2e3446;
+    color: #EAEAEA;
+}
+
+.form-control::placeholder {
+    color: #6b7280;
+}
+
+.form-control:focus {
+    background-color: #2a3040;
+    border-color: #08D9D6;
+    color: #EAEAEA;
+    box-shadow: 0 0 0 2px rgba(8, 217, 214, 0.2);
+}
+
+.form-control:disabled, .form-control[readonly] {
+    background-color: #1c2130;
+    color: #6b7280;
+    border-color: #2e3446;
+}
+
+select.form-control {
+    background-color: #252a36;
+    color: #EAEAEA;
+}
+
+select.form-control option {
+    background-color: #252a36;
+    color: #EAEAEA;
+}
+
+hr {
+    border-color: #2e3446;
+    opacity: 0.6;
+}
+
+/* ===== Checkboxes & Radios ===== */
+.form-check-input {
+    background-color: #252a36;
+    border-color: #2e3446;
+}
+
+.form-check-input:focus {
+    border-color: #08D9D6;
+    box-shadow: 0 0 0 2px rgba(8, 217, 214, 0.2);
+}
+
+.form-check-input:checked {
+    background-color: #08D9D6;
+    border-color: #08D9D6;
+}
+
+.form-check-input:focus:checked {
+    background-color: #08D9D6;
+    border-color: #08D9D6;
+    box-shadow: 0 0 0 2px rgba(8, 217, 214, 0.2);
+}
+
+.form-check-label {
+    color: #c8cdd8;
+}
+
+/* ===== Buttons ===== */
+.btn-primary {
+    background-color: #08D9D6;
+    color: #151921;
+    border-color: #08D9D6;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background-color: #06b8b5;
+    color: #151921;
+    border-color: #06b8b5;
+}
+
+.btn-primary:focus {
+    background-color: #06b8b5;
+    color: #151921;
+    border-color: #06b8b5;
+    box-shadow: 0 0 0 3px rgba(8, 217, 214, 0.3);
+}
+
+.btn-outline-clear {
+    color: #FF2E63;
+    border: 1px solid rgba(255, 46, 99, 0.4);
+    background: transparent;
+}
+
+.btn-outline-clear:hover {
+    color: #EAEAEA;
+    background-color: #FF2E63;
+    border-color: #FF2E63;
+}
+
+.btn-outline-clear:focus {
+    box-shadow: 0 0 0 3px rgba(255, 46, 99, 0.25);
+}
+
+/* Gender radio group */
+.btn-check + label {
+    background-color: #252a36;
+    color: #c8cdd8;
+    border-color: #2e3446;
+}
+
+.btn-check:focus + label {
+    color: #08D9D6;
+    background-color: #1c2130;
+    border-color: #08D9D6;
+    box-shadow: 0 0 0 2px rgba(8, 217, 214, 0.2);
+}
+
+.btn-check:checked + label {
+    color: #151921;
+    background-color: #08D9D6;
+    border-color: #08D9D6;
+}
+
+.btn-check:active + label {
+    color: #151921;
+    background-color: #08D9D6;
+    border-color: #08D9D6;
+}
+
+.btn-check:focus:checked + label {
+    color: #151921;
+    background-color: #08D9D6;
+    border-color: #08D9D6;
+    box-shadow: 0 0 0 2px rgba(8, 217, 214, 0.3);
+}
+
+.btn-group {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 18px;
+}
+
+/* ===== Advanced fields card ===== */
+.card-body {
+    background-color: #191e2a;
+    border: 1px solid #2e3446;
+}
+
+.card-body .form-label {
+    color: #c8cdd8;
+}
+
+.card-body input {
+    border-color: #2e3446;
+}
+
+/* ===== Output section ===== */
+#output {
+    background-color: #151921;
+    padding: 20px;
+}
+
+.output-section hr {
+    border-color: #2e3446;
+}
+
+.output-heading {
+    color: #08D9D6;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+.output-controls .form-check-label {
+    color: #6b7280;
+    font-size: 0.85rem;
+}
+
+/* ===== Barcode cards ===== */
+.barcode-card {
+    background-color: #1c2130;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    border: 1px solid #2e3446;
+}
+
+.barcode-card-header {
+    background-color: #191e2a;
+    padding: 8px 14px;
+    border-bottom: 1px solid #2e3446;
+}
+
+.barcode-label {
+    color: #6b7280;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.btn-dl {
+    color: #08D9D6;
+    border: 1px solid rgba(8, 217, 214, 0.3);
+    font-size: 0.75rem;
+    padding: 2px 10px;
+    background: transparent;
+}
+
+.btn-dl:hover {
+    color: #151921;
+    background-color: #08D9D6;
+    border-color: #08D9D6;
+}
+
+.barcode-card-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 16px;
+    background-color: #ffffff;
+    min-height: 80px;
+}
+
+.barcode-card-body.transparent-bg {
+    background-color: transparent;
+    background-image:
+        linear-gradient(45deg, #252a36 25%, transparent 25%),
+        linear-gradient(-45deg, #252a36 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #252a36 75%),
+        linear-gradient(-45deg, transparent 75%, #252a36 75%);
+    background-size: 16px 16px;
+    background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+}
+
+.barcode-card-body canvas,
+.barcode-card-body svg {
+    max-width: 100%;
+    height: auto;
 }
 
 canvas#pdf417-canvas {
@@ -16,28 +315,40 @@ canvas#pdf417-canvas {
     height: auto;
 }
 
-hr {
-    background-color:#AAAAAA;
+/* ===== Layout helpers ===== */
+.row {
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
-.header {
-    background-color: #08D9D6;
-    color: #252A34;
+.btn-custom {
+    margin-right: 10px;
+    padding: 12px 16px;
+    font-size: 18px;
+    cursor: pointer;
 }
 
-.footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color:#252A34;
-    font-size: xx-small;
-    color: #08D9D6;
+.hidden {
+    display: none;
 }
 
+.inline-label {
+    display: inline-block;
+}
+
+.inline-control {
+    width: auto;
+    display: inline-block;
+}
+
+.warning {
+    color: #FF2E63;
+}
+
+/* ===== Tab styles (retained for compatibility) ===== */
 .tabrow {
-    background-color: #252A34;
-    color:#EAEAEA;
+    background-color: #151921;
+    color: #c8cdd8;
 }
 
 .tabrow .tab {
@@ -53,13 +364,13 @@ hr {
 }
 
 .activetab {
-    background-color: #EAEAEA;
-    color: #252A34;
+    background-color: #1c2130;
+    color: #EAEAEA;
 }
 
 .inactivetab {
-    color: #EAEAEA;
-    background-color: #252A34;
+    color: #6b7280;
+    background-color: #151921;
 }
 
 .tabcontent {
@@ -67,236 +378,21 @@ hr {
     padding: 20px;
 }
 
-.warning {
-    color: #FF2E63;
-}
-
-#container{
-    color: #252A34;
-    background-color: #EAEAEA;
-    margin: 0;
-    padding: 0;
-}
-
-#output {
-    color: #252A34;
-    padding: 0 10px;
-}
-
-.output-section hr {
-    border-color: #08D9D6;
-    opacity: 0.5;
-}
-
-.output-heading {
-    color: #252A34;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-}
-
-.output-controls .form-check-label {
-    color: #252A34;
-    font-size: 0.85rem;
-}
-
-.barcode-card {
-    background-color: #fff;
-    border-radius: 6px;
-    margin-bottom: 16px;
-    overflow: hidden;
-    border: 1px solid #08D9D6;
-}
-
-.barcode-card-header {
-    background-color: #1e2430;
-    padding: 8px 14px;
-    border-bottom: 1px solid #08D9D6;
-}
-
-.barcode-label {
-    color: #EAEAEA;
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-}
-
-.btn-dl {
-    color: #08D9D6;
-    border: 1px solid #08D9D6;
-    font-size: 0.75rem;
-    padding: 2px 10px;
-}
-
-.btn-dl:hover {
-    color: #252A34;
-    background-color: #08D9D6;
-}
-
-.barcode-card-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 24px 16px;
-    background-color: #fff;
-    min-height: 80px;
-}
-
-.barcode-card-body.transparent-bg {
-    background-color: transparent;
-    background-image:
-        linear-gradient(45deg, #ccc 25%, transparent 25%),
-        linear-gradient(-45deg, #ccc 25%, transparent 25%),
-        linear-gradient(45deg, transparent 75%, #ccc 75%),
-        linear-gradient(-45deg, transparent 75%, #ccc 75%);
-    background-size: 16px 16px;
-    background-position: 0 0, 0 8px, 8px -8px, -8px 0;
-}
-
-.barcode-card-body canvas,
-.barcode-card-body svg {
-    max-width: 100%;
-    height: auto;
-}
-
-.btn-outline-clear {
-    color: #FF2E63;
-    border: 1px solid #FF2E63;
-}
-
-.btn-outline-clear:hover {
-    color: #EAEAEA;
-    background-color: #FF2E63;
-    border-color: #FF2E63;
-}
-
-.row {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.form-control:focus {
-    border-color:#08D9D6;
-    box-shadow: 0px 1px 1px #08D9D6 inset, 0px 0px 8px #08D9D6;
-}
-
-.form-check-input {
-    border-color: #08D9D6;
-}
-
-.form-check-input:focus {
-    color: #252A34;
-    border-color: #08D9D6;
-    box-shadow: 0px 1px 1px #08D9D6 inset, 0px 0px 8px #08D9D6;
-}
-
-.form-check-input:checked {
-    background-color: #08D9D6;
-    color: #252A34;
-    border-color: #08D9D6;
-}
-
-.form-check-input:focus:checked {
-    background-color: #08D9D6;
-    color: #252A34;
-    border-color: #08D9D6;
-    box-shadow: 0px 1px 1px #08D9D6 inset, 0px 0px 8px #08D9D6;
-}
-
-.btn-custom {
-    margin-right: 10px;
-    padding: 12px 16px;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-.btn-group {
-    width: 100%;
-    padding: 12px 16px;
-    font-size: 18px;
-}
-
-.btn-primary {
-    background-color: #08D9D6;
-    color: #252A34;
-    border-color: #08D9D6;
-}
-
-.btn-primary:hover {
-    color:#FF2E63;
-    background-color: #252A34;
-    border-color:#FF2E63;
-}
-
-.btn-primary:focus {
-    color:#FF2E63;
-    background-color: #252A34;
-    border-color:#FF2E63;
-    box-shadow: 0px 1px 1px #FF2E63 inset, 0px 0px 8px #FF2E63;
-}
-
-.btn-check + label {
-    background-color: #08D9D6;
-    color: #252A34;
-    border-color: #08D9D6;
-}
-
-.btn-check:focus + label {
-    color:#FF2E63;
-    background-color: #252A34;
-    border-color:#FF2E63;
-    box-shadow: 0px 1px 1px #FF2E63 inset, 0px 0px 8px #FF2E63;
-}
-
-.btn-check:checked + label {
-    color:#FF2E63;
-    background-color: #252A34;
-    border-color:#FF2E63;
-}
-
-.btn-check:active + label {
-    color:#FF2E63;
-    background-color: #252A34;
-    border-color:#FF2E63;
-}
-
-.btn-check:focus:checked + label {
-    color:#FF2E63;
-    background-color: #252A34;
-    border-color:#FF2E63;
-    box-shadow: 0px 1px 1px #FF2E63 inset, 0px 0px 8px #FF2E63;
-}
-
-.card-body {
-    background-color: #CACACA;
-}
-
-.card-body input {
-    border-color: #AAAAAA;
-}
-
-.hidden {
-    display: none;
-}
-
-.inline-label {
-    display:inline-block;
-}
-
-.inline-control {
-    width:auto;
-    display:inline-block;
-}
-
+/* ===== Responsive ===== */
 @media (max-width: 575px) {
     .border-small {
         border-right: none;
+    }
+
+    .output-controls {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 10px;
     }
 }
 
 @media (min-width: 576px) {
     .border-medium {
-        border-right: 0.5px solid #AAAAAA;
+        border-right: 0.5px solid #2e3446;
     }
 }

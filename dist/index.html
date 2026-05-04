@@ -253,45 +253,44 @@
                         </button>
                     </div>
                 </form>
+            </div>
+        </div>
 
-                <div id="output" class="output-section" style="display:none;">
-                    <hr>
-                    <div class="output-controls d-flex justify-content-between align-items-center mb-3 px-2">
-                        <h5 class="output-heading mb-0">Generated Barcodes</h5>
-                        <div class="d-flex align-items-center gap-3">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="chkTransparentBg">
-                                <label class="form-check-label" for="chkTransparentBg">Transparent background</label>
-                            </div>
-                            <button id="btnDownloadAll" class="btn btn-sm btn-primary">
-                                <i class="bi bi-download" style="padding-right: .35rem;"></i>Download All
-                            </button>
-                        </div>
+        <div id="output" class="output-section container-fluid" style="display:none;">
+            <div class="output-controls d-flex justify-content-between align-items-center mb-3 px-2">
+                <h5 class="output-heading mb-0">Generated Barcodes</h5>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="chkTransparentBg">
+                        <label class="form-check-label" for="chkTransparentBg">Transparent background</label>
                     </div>
+                    <button id="btnDownloadAll" class="btn btn-sm btn-primary">
+                        <i class="bi bi-download" style="padding-right: .35rem;"></i>Download All
+                    </button>
+                </div>
+            </div>
 
-                    <div class="barcode-card" id="pdf417-card">
-                        <div class="barcode-card-header d-flex justify-content-between align-items-center">
-                            <span class="barcode-label">PDF417 — AAMVA Barcode</span>
-                            <button class="btn btn-sm btn-dl" id="btnDownloadPDF417">
-                                <i class="bi bi-download"></i> PNG
-                            </button>
-                        </div>
-                        <div class="barcode-card-body" id="pdf417-body">
-                            <canvas id="pdf417-canvas"></canvas>
-                        </div>
-                    </div>
+            <div class="barcode-card" id="pdf417-card">
+                <div class="barcode-card-header d-flex justify-content-between align-items-center">
+                    <span class="barcode-label">PDF417 — AAMVA Barcode</span>
+                    <button class="btn btn-sm btn-dl" id="btnDownloadPDF417">
+                        <i class="bi bi-download"></i> PNG
+                    </button>
+                </div>
+                <div class="barcode-card-body" id="pdf417-body">
+                    <canvas id="pdf417-canvas"></canvas>
+                </div>
+            </div>
 
-                    <div class="barcode-card" id="code128-card" style="display:none;">
-                        <div class="barcode-card-header d-flex justify-content-between align-items-center">
-                            <span class="barcode-label">Code 128 — Inventory Number</span>
-                            <button class="btn btn-sm btn-dl" id="btnDownloadCode128">
-                                <i class="bi bi-download"></i> PNG
-                            </button>
-                        </div>
-                        <div class="barcode-card-body" id="code128-body">
-                            <svg id="code128"></svg>
-                        </div>
-                    </div>
+            <div class="barcode-card" id="code128-card" style="display:none;">
+                <div class="barcode-card-header d-flex justify-content-between align-items-center">
+                    <span class="barcode-label">Code 128 — Inventory Number</span>
+                    <button class="btn btn-sm btn-dl" id="btnDownloadCode128">
+                        <i class="bi bi-download"></i> PNG
+                    </button>
+                </div>
+                <div class="barcode-card-body" id="code128-body">
+                    <svg id="code128"></svg>
                 </div>
             </div>
         </div>
