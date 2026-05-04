@@ -47,6 +47,52 @@ $(document).ready(() => {
         e.preventDefault();
         $.fn.resetForm();
     });
+
+    // Transparent background toggle
+    $("#chkTransparentBg").change(function() {
+        let transparent = $(this).is(':checked');
+        if (transparent) {
+            $(".barcode-card-body").addClass("transparent-bg");
+        } else {
+            $(".barcode-card-body").removeClass("transparent-bg");
+        }
+        // Redraw PDF417 canvas
+        let canvas = document.getElementById('pdf417-canvas');
+        if (canvas.width > 0) {
+            if (transparent) {
+                $.fn.redrawPDF417Transparent();
+            } else {
+                $.fn.redrawPDF417White();
+            }
+        }
+        // Re-render Code128 SVG with new background
+        if ($("#code128-card").is(":visible")) {
+            let inventoryNum = $("#txtInventoryNum").val();
+            if (inventoryNum) {
+                $.fn.generateCode128(inventoryNum);
+            }
+        }
+    });
+
+    // Download PDF417 as PNG
+    $("#btnDownloadPDF417").click(function() {
+        $.fn.downloadCanvas('pdf417-canvas', 'pdf417-barcode.png');
+    });
+
+    // Download Code128 as PNG
+    $("#btnDownloadCode128").click(function() {
+        $.fn.downloadSVG('code128', 'code128-barcode.png');
+    });
+
+    // Download All
+    $("#btnDownloadAll").click(function() {
+        $.fn.downloadCanvas('pdf417-canvas', 'pdf417-barcode.png');
+        if ($("#code128-card").is(":visible")) {
+            setTimeout(() => {
+                $.fn.downloadSVG('code128', 'code128-barcode.png');
+            }, 300);
+        }
+    });
 });
 
 
@@ -60,9 +106,14 @@ $.fn.extend({
     },
 
     resetForm: function() {
-        $('#input-form').find('input:text, input:date, select, textarea').val('');
-        $('#input-form').find('input:radio').removeAttr('checked').removeAttr('selected');
-        $('#pdf417').empty();
+        $('#input-form')[0].reset();
+        let canvas = document.getElementById('pdf417-canvas');
+        let ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        canvas.width = 0;
+        canvas.height = 0;
+        $('#code128').empty();
+        $('#code128-card').hide();
         $('#output').hide();
     },
 
@@ -232,34 +283,130 @@ $.fn.extend({
             console.log(`aamva = ${aamva}`);
 
             $.fn.generatePDF417(aamva);
-            $('.output-hidden').show();
+
+            if ($('#chkMake1DBarcode').is(':checked')) {
+                let inventoryNum = $("#txtInventoryNum").val();
+                if (inventoryNum) {
+                    $.fn.generateCode128(inventoryNum);
+                    $("#code128-card").show();
+                } else {
+                    $("#code128-card").hide();
+                }
+            } else {
+                $("#code128-card").hide();
+            }
+
+            $('#output').show();
+            $('html, body').animate({ scrollTop: $('#output').offset().top - 20 }, 400);
     },
 
     generatePDF417: function(input) {
         PDF417.init(input, 5);
 
         let barcode = PDF417.getBarcodeArray();
-        let bw = 2;
-        let bh = 6;
+        let scale = 3;
+        let bw = scale;
+        let bh = scale * 3;
+        let canvas = document.getElementById('pdf417-canvas');
+        canvas.width = bw * barcode['num_cols'];
+        canvas.height = bh * barcode['num_rows'];
 
-        $("#pdf417").empty().append(`<a><canvas width="${bw * barcode['num_cols']}" height="${bh * barcode['num_rows']}"></canvas></a>`);
+        let ctx = canvas.getContext('2d');
 
-        let ctx = $("#pdf417>a").children()[0].getContext('2d');
+        // Fill background based on toggle state
+        if (!$('#chkTransparentBg').is(':checked')) {
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        } else {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
 
         var y = 0;
         for (var r = 0; r < barcode['num_rows']; ++r) {
             var x = 0;
-
             for (var c = 0; c < barcode['num_cols']; ++c) {
-                ctx.fillStyle = 'white';
                 if (barcode['bcode'][r][c] == 1) {
                     ctx.fillStyle = 'black';
+                    ctx.fillRect(x, y, bw, bh);
                 }
-                ctx.fillRect(x,y,bw,bh);
                 x += bw;
             }
             y += bh;
         }
+    },
+
+    generateCode128: function(input) {
+        let transparent = $('#chkTransparentBg').is(':checked');
+        JsBarcode("#code128", input, {
+            format: "CODE128",
+            width: 3,
+            height: 80,
+            displayValue: true,
+            fontSize: 16,
+            margin: 15,
+            background: transparent ? "transparent" : "#ffffff",
+            lineColor: "#000000"
+        });
+    },
+
+    downloadCanvas: function(canvasId, filename) {
+        let canvas = document.getElementById(canvasId);
+        let link = document.createElement('a');
+        link.download = filename;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    },
+
+    downloadSVG: function(svgId, filename) {
+        let svg = document.getElementById(svgId);
+        let svgData = new XMLSerializer().serializeToString(svg);
+        let canvas = document.createElement('canvas');
+        let ctx = canvas.getContext('2d');
+        let img = new Image();
+
+        img.onload = function() {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+            let link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        };
+        img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
+    },
+
+    redrawPDF417Transparent: function() {
+        let canvas = document.getElementById('pdf417-canvas');
+        let ctx = canvas.getContext('2d');
+        let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        let data = imageData.data;
+        // Make white pixels transparent
+        for (let i = 0; i < data.length; i += 4) {
+            if (data[i] === 255 && data[i+1] === 255 && data[i+2] === 255) {
+                data[i+3] = 0;
+            }
+        }
+        ctx.putImageData(imageData, 0, 0);
+    },
+
+    redrawPDF417White: function() {
+        // Re-generate to get white background back
+        // We store the last encoded data so we can re-render
+        let canvas = document.getElementById('pdf417-canvas');
+        let ctx = canvas.getContext('2d');
+        let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        let data = imageData.data;
+        // Make transparent pixels white
+        for (let i = 0; i < data.length; i += 4) {
+            if (data[i+3] === 0) {
+                data[i] = 255;
+                data[i+1] = 255;
+                data[i+2] = 255;
+                data[i+3] = 255;
+            }
+        }
+        ctx.putImageData(imageData, 0, 0);
     }
 });
 

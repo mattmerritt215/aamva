@@ -5,11 +5,6 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- fagmob fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-
         <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
@@ -36,25 +31,17 @@
 
         <!-- Custom js assets -->
         <script src="assets/index.js"></script>
-        <script src="assets/popover.js"></script>
-
         <!-- Custom css assets -->
         <link rel="stylesheet" href="assets/index.css">
-        <link rel="stylesheet" href="assets/popover.css">
 
-        <title>fagmob.lol — PDF417 encoder</title>
+        <title>PDF417 Barcode Encoder</title>
     </head>
     <body>
         <div class="p-5 header text-center">
-            <h1>PDF417 encoder</h1>
-            <p>AAMVA-compliant barcode generation</p>
+            <h1>PDF417 Barcode Encoder</h1>
+            <p>Create PDF417 barcodes to meet AAMVA standards</p>
         </div>
         <div id="container" class="container-fluid">
-                <div id="output" class="output-hidden" style="margin-left: 20px; margin-right: 20px; padding-bottom: 15px; border-bottom: 2px solid #777;">
-                    <div class="d-flex flex-column justify-content-center">
-                        <div id="pdf417" class="p-2"></div>
-                   </div>
-                </div>
                 <form id="input-form" class="needs-validation">
                     <div class="row">
                         <div class="col col-sm-6 col-md-2">
@@ -201,12 +188,12 @@
                         </div>
                     </div>
                     <hr>
-                    <!-- <div class="d-flex justify-content-end">
+                    <div class="d-flex justify-content-end">
                         <div class="flex-shrink-1 form-check form-check-inline">
                             <input id="chkMake1DBarcode" class="form-check-input" value="true" type="checkbox">
-                            <label class="form-check-label" for="chkMake1DBarcode">Make 1D Barcode?</label>
+                            <label class="form-check-label" for="chkMake1DBarcode">Generate Code 128 barcode from Inventory Number</label>
                         </div>
-                    </div> -->
+                    </div>
                     <p>
                     <a id="btnAdvanced" class="btn btn-primary" data-bs-toggle="collapse" href="#advancedFields" role="button">
                         <i class="bi bi-caret-down-fill" style="padding-right: .55rem;"></i>Advanced Fields
@@ -259,15 +246,57 @@
                         </div>
                     </div>
                     <hr>
-                    <div class="d-flex flex-row-reverse align-items-center align-content-center pb-3">
-                        <input id="btnSubmit" class="btn btn-primary" type="submit" value="Submit" />
-                        <a id="btnReset" href="#" class="btn btn-reset">Reset</a>
+                    <div class="d-flex flex-row-reverse align-items-center align-content-center gap-3 pb-3">
+                        <input id="btnSubmit" class="btn btn-primary" type="submit" value="Generate" />
+                        <button id="btnReset" type="button" class="btn btn-outline-clear">
+                            <i class="bi bi-x-circle" style="padding-right: .35rem;"></i>Clear
+                        </button>
                     </div>
                 </form>
+
+                <div id="output" class="output-section" style="display:none;">
+                    <hr>
+                    <div class="output-controls d-flex justify-content-between align-items-center mb-3 px-2">
+                        <h5 class="output-heading mb-0">Generated Barcodes</h5>
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="chkTransparentBg">
+                                <label class="form-check-label" for="chkTransparentBg">Transparent background</label>
+                            </div>
+                            <button id="btnDownloadAll" class="btn btn-sm btn-primary">
+                                <i class="bi bi-download" style="padding-right: .35rem;"></i>Download All
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="barcode-card" id="pdf417-card">
+                        <div class="barcode-card-header d-flex justify-content-between align-items-center">
+                            <span class="barcode-label">PDF417 — AAMVA Barcode</span>
+                            <button class="btn btn-sm btn-dl" id="btnDownloadPDF417">
+                                <i class="bi bi-download"></i> PNG
+                            </button>
+                        </div>
+                        <div class="barcode-card-body" id="pdf417-body">
+                            <canvas id="pdf417-canvas"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="barcode-card" id="code128-card" style="display:none;">
+                        <div class="barcode-card-header d-flex justify-content-between align-items-center">
+                            <span class="barcode-label">Code 128 — Inventory Number</span>
+                            <button class="btn btn-sm btn-dl" id="btnDownloadCode128">
+                                <i class="bi bi-download"></i> PNG
+                            </button>
+                        </div>
+                        <div class="barcode-card-body" id="code128-body">
+                            <svg id="code128"></svg>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="footer d-flex justify-content-end">
-                fagmob.fail PDF417 encoder
+                fagmob.lol PDF417 encoder
         </div>
     </body>
 </html>
