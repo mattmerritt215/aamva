@@ -304,9 +304,8 @@ $.fn.extend({
         PDF417.init(input, 5);
 
         let barcode = PDF417.getBarcodeArray();
-        let scale = 3;
-        let bw = scale;
-        let bh = scale * 3;
+        let bw = 2;
+        let bh = 2;
         let canvas = document.getElementById('pdf417-canvas');
         canvas.width = bw * barcode['num_cols'];
         canvas.height = bh * barcode['num_rows'];
@@ -341,7 +340,7 @@ $.fn.extend({
             format: "CODE128",
             width: 3,
             height: 80,
-            displayValue: true,
+            displayValue: false,
             fontSize: 16,
             margin: 15,
             background: transparent ? "transparent" : "#ffffff",
